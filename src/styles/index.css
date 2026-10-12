@@ -1057,6 +1057,24 @@ img {
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
+  /* Scroll Entrance Animation */
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.work-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 @media (min-width: 768px) {
@@ -1726,7 +1744,240 @@ img {
   font-weight: 300;
   letter-spacing: -0.03em;
   color: var(--color-charcoal);
-  margin-bottom: 48px;
+  margin-bottom: 32px;
+}
+
+/* Footer Contact Form & Client Validation */
+.footer-form-container {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto 36px;
+  text-align: left;
+}
+
+.footer-contact-form {
+  background-color: rgba(247, 241, 237, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--color-charcoal);
+  border-radius: 20px;
+  padding: 28px 24px;
+  box-shadow: 0 16px 36px rgba(36, 36, 36, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-fields-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .form-fields-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.form-field-full {
+  width: 100%;
+}
+
+.form-label {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-charcoal);
+}
+
+.label-required {
+  color: #C53030;
+  font-weight: bold;
+}
+
+.label-optional {
+  text-transform: none;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-charcoal);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+  box-sizing: border-box;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #8C8C8C;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-charcoal);
+  box-shadow: 0 0 0 2px rgba(36, 36, 36, 0.15);
+}
+
+.form-input.has-error {
+  border-color: #C53030;
+  background-color: #FFF5F5;
+}
+
+.form-input.has-error:focus {
+  box-shadow: 0 0 0 2px rgba(197, 48, 48, 0.2);
+}
+
+.form-input.is-valid {
+  border-color: #2F855A;
+}
+
+.form-error-msg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #9B1C1C;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.form-error-msg svg {
+  flex-shrink: 0;
+  stroke: #C53030;
+}
+
+.form-submit-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.footer-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border-radius: 50px;
+  background-color: var(--color-charcoal);
+  color: var(--color-bg);
+  border: 1px solid var(--color-charcoal);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-default);
+}
+
+.footer-submit-btn:hover:not(:disabled) {
+  background-color: var(--color-signature);
+  border-color: var(--color-signature);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(244, 96, 10, 0.35);
+}
+
+.footer-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.submit-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(247, 241, 237, 0.3);
+  border-top-color: var(--color-bg);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Success Card */
+.footer-form-success {
+  background-color: rgba(247, 241, 237, 0.95);
+  border: 1px solid var(--color-charcoal);
+  border-radius: 20px;
+  padding: 36px 24px;
+  text-align: center;
+  box-shadow: 0 16px 36px rgba(36, 36, 36, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.success-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #2F855A;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+.success-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--color-charcoal);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.success-desc {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--color-charcoal);
+  max-width: 420px;
+  line-height: 1.5;
+}
+
+.footer-form-reset-btn {
+  margin-top: 8px;
+  background: transparent;
+  border: 1px solid var(--color-charcoal);
+  border-radius: 50px;
+  padding: 10px 24px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-charcoal);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.footer-form-reset-btn:hover {
+  background-color: var(--color-charcoal);
+  color: var(--color-bg);
 }
 
 /* Social icons and mail interactive circle */
@@ -2266,6 +2517,41 @@ img {
   background-color: var(--color-charcoal);
   color: var(--color-bg);
   border-color: var(--color-charcoal);
+}
+
+/* -------------------------------------------------------------
+   Subtle Scroll Progress Indicator
+------------------------------------------------------------- */
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background-color: rgba(172, 172, 172, 0.15);
+  z-index: 1200;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-progress-container.is-active {
+  opacity: 1;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  width: 100%;
+  transform-origin: 0% 50%;
+  background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-signature) 100%);
+  box-shadow: 0 0 8px rgba(244, 96, 10, 0.4);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress-container {
+    transition: none;
+  }
 }
 
 /* -------------------------------------------------------------

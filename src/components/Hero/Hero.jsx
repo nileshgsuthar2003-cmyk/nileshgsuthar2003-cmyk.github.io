@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import scribbleSvg from '../../assets/scribble.svg';
 import Signature from './Signature';
 import ResumeModal from '../Navigation/ResumeModal';
+import { trackResumeDownload } from '../../utils/analytics';
 
 function Hero() {
   const [backdropActive, setBackdropActive] = useState(false);
@@ -20,6 +21,11 @@ function Hero() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleOpenResumeModal = () => {
+    trackResumeDownload({ action: 'open_resume_modal', source: 'hero_section' });
+    setIsModalOpen(true);
   };
 
   return (
@@ -57,7 +63,7 @@ function Hero() {
 
         {/* Hero Actions */}
         <div className="hero-actions">
-          <button className="hero-btn primary-hero-btn" onClick={() => setIsModalOpen(true)}>
+          <button className="hero-btn primary-hero-btn" onClick={handleOpenResumeModal}>
             <span>Download CV</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
