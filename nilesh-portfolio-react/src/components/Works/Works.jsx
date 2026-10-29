@@ -38,13 +38,13 @@ function Works() {
       id: 3,
       title: "Online Book Store",
       category: "Full Stack App",
-      description: "Built a dynamic full-stack e-commerce web application with REST APIs for product search, filtering, and cart management, coupled with a relational database to manage inventories.",
+      description: "Built a dynamic full-stack e-commerce web application with a React frontend and Flask REST APIs for product search, filtering, and cart management, coupled with a relational database.",
       highlights: [
-        "Engineered RESTful API endpoints for seamless catalog browsing, item filtering, and cart state persistence.",
-        "Designed relational MySQL database schema for inventory management, order processing, and user transactions."
+        "Engineered RESTful API endpoints using Flask and relational MySQL database schema for inventory management and order processing.",
+        "Developed responsive React frontend for seamless catalog browsing, item filtering, and cart state persistence."
       ],
-      year: "2024",
-      tags: ["Java", "Spring Boot", "MySQL", "REST APIs", "HTML5 / CSS3"],
+      year: "2026",
+      tags: ["React", "Python", "Flask", "MySQL", "REST APIs"],
       link: "https://github.com/nileshgsuthar2003-cmyk",
       mockupType: "bookstore"
     },
