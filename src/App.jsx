@@ -1,5 +1,6 @@
 import useLenis from './hooks/useLenis';
 import GridLines from './components/layout/GridLines';
+import ScrollProgress from './components/layout/ScrollProgress';
 import Navigation from './components/Navigation/Navigation';
 import Hero from './components/Hero/Hero';
 import IntroText from './components/IntroText/IntroText';
@@ -16,6 +17,9 @@ function App() {
 
   return (
     <>
+      {/* Scroll Progress Indicator at top of viewport */}
+      <ScrollProgress />
+
       {/* Fixed Vertical Grid Lines */}
       <GridLines />
 

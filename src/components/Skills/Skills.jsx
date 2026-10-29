@@ -5,7 +5,6 @@ import brushStroke from '../../assets/brush-stroke.webp';
 function Skills() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef(null);
   const displayBoxRef = useRef(null);
   const prevIndexRef = useRef(0);
@@ -28,7 +27,6 @@ function Skills() {
       if (scrollableDistance <= 0) return;
 
       const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
-      setScrollProgress(progress);
 
       // Map progress to skill index
       // Divide the scroll range evenly among skills

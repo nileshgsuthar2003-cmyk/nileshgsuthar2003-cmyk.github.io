@@ -1,7 +1,25 @@
+import { trackResumeDownload } from '../../utils/analytics';
+
 function ResumeModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   const resumePath = `${import.meta.env.BASE_URL}documents/Nilesh_Suthar_Resume.pdf`;
+
+  const handleDownloadClick = () => {
+    trackResumeDownload({
+      action: 'direct_download',
+      source: 'resume_modal',
+      method: 'file_attachment',
+    });
+  };
+
+  const handleViewClick = () => {
+    trackResumeDownload({
+      action: 'view_in_tab',
+      source: 'resume_modal',
+      method: 'new_window',
+    });
+  };
 
   return (
     <div className="resume-modal-overlay" onClick={onClose}>
@@ -10,7 +28,7 @@ function ResumeModal({ isOpen, onClose }) {
           <div className="modal-title-wrap">
             <h3 className="modal-title">Nilesh Suthar — Resume</h3>
           </div>
-          <button className="modal-close-btn" onClick={onClose}>&times;</button>
+          <button className="modal-close-btn" onClick={onClose} aria-label="Close modal">&times;</button>
         </div>
 
         <div className="modal-body">
@@ -23,6 +41,7 @@ function ResumeModal({ isOpen, onClose }) {
               href={resumePath} 
               download="Nilesh_Suthar_Resume.pdf"
               className="modal-btn primary-btn"
+              onClick={handleDownloadClick}
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -37,6 +56,7 @@ function ResumeModal({ isOpen, onClose }) {
               target="_blank" 
               rel="noopener noreferrer" 
               className="modal-btn secondary-btn"
+              onClick={handleViewClick}
             >
               View Resume ↗
             </a>

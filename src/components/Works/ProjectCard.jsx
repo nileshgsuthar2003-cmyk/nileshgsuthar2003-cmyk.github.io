@@ -1,6 +1,48 @@
-function ProjectCard({ project }) {
+import { useState, useEffect, useRef } from 'react';
+
+function ProjectCard({ project, index = 0 }) {
+  const [isVisible, setIsVisible] = useState(() => {
+    return typeof window !== 'undefined' && !('IntersectionObserver' in window);
+  });
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    const element = cardRef.current;
+    if (!element || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <a href={project.link} target="_blank" rel="noopener noreferrer" className="work-card">
+    <a
+      ref={cardRef}
+      href={project.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`work-card ${isVisible ? 'is-visible' : ''}`}
+      style={{
+        transitionDelay: isVisible ? `${(index % 2) * 120}ms` : '0ms',
+      }}
+    >
       <div className="card-hover-bg"></div>
       
       {/* Mockups based on project type */}
